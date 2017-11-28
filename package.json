@@ -1,0 +1,22 @@
+{
+  "name": "mod2_konrad",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "live-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/k-jahn/mod2_konrad.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/k-jahn/mod2_konrad/issues"
+  },
+  "homepage": "https://github.com/k-jahn/mod2_konrad#readme",
+  "dependencies": {
+    "live-server": "^1.2.0"
+  }
+}

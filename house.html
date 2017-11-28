@@ -3,34 +3,62 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="styles/main.css">
 </head>
 
 <body>
-    <nav>
+
+    <header>
+
         <div>
-            <div>
-                <a href="#">TGIF</a>
-            </div>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li>
-                    <a href="#">Congress 113</a>
-                    <ul>
-                        <li><a href="senate.html">Senate</a></li>
-                        <li><a href="house.html">House</a></li>
-                    </ul>
-                </li>
-            </ul>
+            <a href="index.html"><img src="http://via.placeholder.com/350x150"></a>
         </div>
-    </nav>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="#">Congress 113</a>
+                        <ul>
+                            <li class="active"><a href="senate.html">Senate</a></li>
+                            <li><a href="house.html">House</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
     <!--Table container-->
     <div>
         <h2>Congressmen</h2>
         <p>The major power of the House is to pass federal legislation that affects the entire country, although its bills must also be passed by the Senate and further agreed to by the U.S. President before becoming law (unless both the House and Senate re-pass the legislation with a two-thirds majority in each chamber). The House has some exclusive powers: the power to initiate revenue bills, to impeach officials (impeached officials are subsequently tried in the Senate), and to elect the U.S. President in case there is no majority in the Electoral College.</p>
         <p>Each U.S. state is represented in the House in proportion to its population as measured in the census, but every state is entitled to at least one representative. </p>
-        <table id="dataDisplay">
+        <div>
+            Filter by Party:
+            <ul>
+                <li>
+                    <label>
+                        <input type="checkbox" name="">
+                        Republican
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" name="">
+                        Democrat
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" name="">
+                        Independent
+                    </label>
+                </li>
+            </ul>
+        </div>
+        <table class="table table-striped" id="dataDisplay">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -42,6 +70,7 @@
             </thead>
         </table>
         <script type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
+       <!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script> -->
         <script type="text/javascript" src="data/proPublica-congress-113-house-members.js"></script>
         <script type="text/javascript" src="scripts/houseData.js"></script>
     </div>

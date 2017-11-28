@@ -1,5 +1,6 @@
 console.log('loading script for senate data')
 function dispData(data){
+	$('#dataDisplay').append('<tbody>')
 	for (var i in data) {
 		var row="<tr><td>" //build row string for each member
 				+'<a href="'
@@ -23,6 +24,7 @@ function dispData(data){
 				+data[i].votes_with_party_pct+"%"
 				+"</td></tr>"
 		$('#dataDisplay').append(row)
+		$('#dataDisplay').append('</tbody>')
 	}
 }
 
