@@ -66,7 +66,7 @@ function DataHandler() {
     // fetch members.json and call displayMembers
     this.fetchMembers = function() {
         var that = this;
-        $.getJSON('data/proPublica-' + this.chamber + this.congress + '.json', function(data) {
+        $.getJSON('data/proPublica/' + this.congress + '/' +this.chamber + '.json', function(data) {
             console.log('members.json loaded')
             that.members = data.results[0].members;
             that.displayMembers();
@@ -78,12 +78,12 @@ function DataHandler() {
     	//get url.params
     	var urlPars={}
     	document.URL.replace(
-    		new RegExp(/([^?&=]+)=([^&=]+)/,'g'),
+    		/([^?&=]+)=([^&=]+)/g,
     		(a,b,c)=>{
     			urlPars[b]=c;
     		}
     	)
-    	//asign values
+    	//assign values
         this.chamber = $('body').data('chamber');
         this.congress = urlPars.congress || 113;
         this.fetchStates();

@@ -18,13 +18,16 @@
                 <h1>TGIF</h1>
                 <a href="mailto:info@tgif.net">info@tgif.net</a>
             </div>
-            <nav>
+            <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <ul class="nav navbar-nav">
                         <li><a href="index.html">Home</a></li>
-                        <li>
-                            <a href="#">Congress 113</a>
-                            <ul>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Congress 113
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
                                 <li class="active"><a href="senate.html?congress=113">Senate</a></li>
                                 <li><a href="house.html?congress=113">House</a></li>
                             </ul>
@@ -33,7 +36,6 @@
                 </div>
             </nav>
         </header>
-        <!--Table container-->
         <div>
             <h2>
                 Congressmen
@@ -46,23 +48,15 @@
             </p>
             <div>
                 Filter by Party:
-                <ul>
-                    <li>
-                        <label>
+                        <label class="checkbox-inline">
                             <input type="checkbox" id="filterR" name="" checked> Republican
                         </label>
-                    </li>
-                    <li>
-                        <label>
+                        <label class="checkbox-inline">
                             <input type="checkbox" id="filterD" name="" checked> Democrat
-                        </label>
-                    </li>
-                    <li>
-                        <label>
+                        </label >
+                        <label class="checkbox-inline">
                             <input type="checkbox" id="filterI" name="" checked> Independent
                         </label>
-                    </li>
-                </ul>
                 Filter by State:
                 <select id="filterStates">
                     <option value=""></option>
@@ -82,7 +76,7 @@
                 </tbody>
             </table>
             <script type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
-            <!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script> -->
+            <script src="scripts/bootstrap.min.js"></script>
             <script type="text/javascript" src="scripts/displayData.js"></script>
         </div>
     </div>
