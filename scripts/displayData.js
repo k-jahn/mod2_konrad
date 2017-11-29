@@ -73,12 +73,12 @@ function DataHandler() {
         });
     };
 
-    // init(), sets needed values calls fetches
+    // init(), sets needed values&calls fetches
     this.init = function() {
-    	//get url.params
+    	//get url.params - overkill, but extendable
     	var urlPars={}
     	document.URL.replace(
-    		/([^?&=]+)=([^&=]+)/g,
+    		/([^?&=#]+)=([^&=#]+)/g,
     		(a,b,c)=>{
     			urlPars[b]=c;
     		}

@@ -1,0 +1,15 @@
+body {
+	font-size: 18px;
+	/*background-color: #404 */
+}
+
+.navbar {
+	border-radius: 0;
+}
+.siteWrapper {
+	margin: 0 auto;
+	max-width: 1000px;
+}
+main {
+	padding: 1em;
+}

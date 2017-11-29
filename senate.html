@@ -8,78 +8,91 @@
 </head>
 
 <body data-chamber="senate">
-    <header>
-        <div>
-            <a href="index.html">
-                <img src="http://via.placeholder.com/100x100">
-            </a>
-            <h2>TGIF</h2>
-            <a href="mailto:info@tgif.net">info@tgif.net</a>
-        </div>
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <ul class="nav navbar-nav">
-                    <li><a href="index.html">Home</a></li>
-                    <li>
-                        <a href="#">Congress 113</a>
-                        <ul>
-                            <li class="active">
-                                <a href="senate.html?congress=113">Senate</a>
-                            </li>
-                            <li>
-                                <a href="house.html?congress=113">House</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+    <div class="container-fluid siteWrapper">
+        <header>
+            <div class="row">
+                <div class="col-sm-6"><a href="index.html">
+                                    <img src="images/logo.png">
+                                </a></div>
+                <div class="col-sm-6">
+                    <span class="glyphicon glyphicon-envelope"></span>
+                    <a href="mailto:info@tgif.net">
+                        info@tgif.net
+                    </a>
+                </div>
             </div>
-        </nav>
-    </header>
-    <div>
-        <h2>Senators</h2>
-        <p>
-            First convened in 1789, the composition and powers of the Senate are established in Article One of the U.S. Constitution. Each state is represented by two senators, regardless of population, who serve staggered six-year terms. The Senate has several exclusive powers not granted to the House, including consenting to treaties as a precondition to their ratification and consenting to or confirming appointments of Cabinet secretaries, federal judges, other federal executive officials, military officers, regulatory officials, ambassadors, and other federal uniformed officers, as well as trial of federal officials impeached by the House.
-        </p>
-        <div>
-            Filter by Party:
-            <ul>
-                <li>
-                    <label>
-                        <input type="checkbox" id="filterR" name="" checked> Republican
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox" id="filterD" name="" checked> Democrat
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input type="checkbox" id="filterI" name="" checked> Independent
-                    </label>
-                </li>
-            </ul>
-            Filter by State:
-            <select id="filterStates">
-                <option value=""></option>
-            </select>
-        </div>
-        <table id="dataDisplay" class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Party</th>
-                    <th>State</th>
-                    <th>Seniority</th>
-                    <th>Votes with party</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-        <script type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
-        <script type="text/javascript" src="scripts/displayData.js"></script>
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <ul class="nav navbar-nav">
+                        <li><a href="index.html">Home</a></li>
+                        <li class="dropdown active">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Congress 113
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="active"><a href="senate.html?congress=113">Senate</a></li>
+                                <li><a href="house.html?congress=113">House</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <h2>Senators</h2>
+            <p>
+                First convened in 1789, the composition and powers of the Senate are established in Article One of the U.S. Constitution. Each state is represented by two senators, regardless of population, who serve staggered six-year terms. The Senate has several exclusive powers not granted to the House, including consenting to treaties as a precondition to their ratification and consenting to or confirming appointments of Cabinet secretaries, federal judges, other federal executive officials, military officers, regulatory officials, ambassadors, and other federal uniformed officers, as well as trial of federal officials impeached by the House.
+            </p>
+            <div class="row">
+                <div class="col-sm-6">
+                    Filter by Party:
+                    <ul>
+                        <li>
+                            <label>
+                                <input type="checkbox" id="filterR" name="" checked> Republican
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" id="filterD" name="" checked> Democrat
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" id="filterI" name="" checked> Independent
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-6">
+                    Filter by State:
+                    <select id="filterStates">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <table id="dataDisplay" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Party</th>
+                        <th>State</th>
+                        <th>Seniority</th>
+                        <th>Votes with party</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </main>
+        <footer>
+            <span class="glyphicon glyphicon-copyright-mark"></span> 2017 TGIF | All rights reserved
+        </footer>
     </div>
+    <script type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="scripts/displayData.js"></script>
 </body>
 
 </html>
