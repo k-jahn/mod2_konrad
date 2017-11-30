@@ -12,17 +12,9 @@
 <body data-chamber="house">
     <div class="container-fluid siteWrapper">
         <header>
-            <div class="row">
-                <div class="col-sm-6"><a href="index.html">
-                                    <img src="images/logo.png">
-                                </a></div>
-                <div class="col-sm-6">
-                    <span class="glyphicon glyphicon-envelope"></span>
-                    <a href="mailto:info@tgif.net">
-                        info@tgif.net
-                    </a>
-                </div>
-            </div>
+            <a href="index.html">
+                <img src="images/logo.png">
+            </a>
             <nav class="navbar navbar-inverse">
                 <div class="container-fluid">
                     <ul class="nav navbar-nav">
@@ -51,30 +43,41 @@
             <p>
                 Each U.S. state is represented in the House in proportion to its population as measured in the census, but every state is entitled to at least one representative.
             </p>
-            <div>
-                Filter by Party:
-                <label class="checkbox-inline">
-                    <input type="checkbox" id="filterR" name="" checked> Republican
-                </label>
-                <label class="checkbox-inline">
-                    <input type="checkbox" id="filterD" name="" checked> Democrat
-                </label>
-                <label class="checkbox-inline">
-                    <input type="checkbox" id="filterI" name="" checked> Independent
-                </label>
-                Filter by State:
-                <select id="filterStates">
-                    <option value=""></option>
-                </select>
+            <div class="row filterContainer">
+                <div class="col-md-7"><h4>Filter by Party:</h4>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="filterR" name="" checked> Republican
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="filterD" name="" checked> Democrat
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="filterI" name="" checked> Independent
+                    </label>
+                </div>
+                <div class="col-md-5 text-right"><h4>Filter by State:</h4>
+                    <select id="filterStates">
+                        <option value=""></option>
+                    </select>
+                </div>
             </div>
-            <table class="table table-hover" id="dataDisplay">
+            <table id="dataDisplay" class="table table-hover">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Party</th>
-                        <th>State</th>
-                        <th>Seniority</th>
-                        <th>Votes with party</th>
+                        <th data-key="full_name" data-format="linkUrl" class="col-xs-4">
+                            Name
+                        </th>
+                        <th data-key="party" data-format="plain" class="col-xs-2">
+                            Party
+                        </th>
+                        <th data-key="state" data-format="plain" class="col-xs-2">
+                            State
+                        </th>
+                        <th data-key="seniority" data-format="plain" class="col-xs-2">Seniority
+                        </th>
+                        <th data-key="votes_with_party_pct" data-format="percent"  class="col-xs-2">
+                            Votes with party
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -82,7 +85,11 @@
             </table>
         </main>
         <footer>
-            <span class="glyphicon glyphicon-copyright-mark"></span> 2017 TGIF | All rights reserved
+            <span class="glyphicon glyphicon-copyright-mark"></span> 2017 TGIF | All rights reserved |
+            <span class="glyphicon glyphicon-envelope"></span>
+            <a href="mailto:info@tgif.net">
+                info@tgif.net
+            </a>
         </footer>
     </div>
     <script type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>

@@ -13,3 +13,38 @@ body {
 main {
 	padding: 1em;
 }
+
+footer {
+	text-align: center;
+	padding: 10px;
+	border: 1px solid #080808;
+	color: #fff;
+	background-color: #222;
+	margin-top: 20px;
+}
+
+.filterContainer {
+	margin: 2em 0;
+}
+.collapseLink {
+	color: #000;
+}
+.collapseLink:hover {
+	color: #222;
+	text-decoration: none;
+}
+.collapseLink:focus {
+	color: #000;
+	text-decoration: none;
+}
+.logoWrapper {
+	display: inline;
+}
+.mail {
+	display: inline-block;
+}
+h4 {
+	display: inline;
+	margin-right: 1em;
+	font-weight: bold;
+}

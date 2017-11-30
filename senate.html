@@ -10,17 +10,9 @@
 <body data-chamber="senate">
     <div class="container-fluid siteWrapper">
         <header>
-            <div class="row">
-                <div class="col-sm-6"><a href="index.html">
-                                    <img src="images/logo.png">
-                                </a></div>
-                <div class="col-sm-6">
-                    <span class="glyphicon glyphicon-envelope"></span>
-                    <a href="mailto:info@tgif.net">
-                        info@tgif.net
-                    </a>
-                </div>
-            </div>
+            <a href="index.html">
+                <img src="images/logo.png">
+            </a>
             <nav class="navbar navbar-inverse">
                 <div class="container-fluid">
                     <ul class="nav navbar-nav">
@@ -44,29 +36,19 @@
             <p>
                 First convened in 1789, the composition and powers of the Senate are established in Article One of the U.S. Constitution. Each state is represented by two senators, regardless of population, who serve staggered six-year terms. The Senate has several exclusive powers not granted to the House, including consenting to treaties as a precondition to their ratification and consenting to or confirming appointments of Cabinet secretaries, federal judges, other federal executive officials, military officers, regulatory officials, ambassadors, and other federal uniformed officers, as well as trial of federal officials impeached by the House.
             </p>
-            <div class="row">
-                <div class="col-sm-6">
-                    Filter by Party:
-                    <ul>
-                        <li>
-                            <label>
-                                <input type="checkbox" id="filterR" name="" checked> Republican
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox" id="filterD" name="" checked> Democrat
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="checkbox" id="filterI" name="" checked> Independent
-                            </label>
-                        </li>
-                    </ul>
+            <div class="row filterContainer">
+                <div class="col-md-7"><h4>Filter by Party:</h4>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="filterR" name="" checked> Republican
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="filterD" name="" checked> Democrat
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="filterI" name="" checked> Independent
+                    </label>
                 </div>
-                <div class="col-sm-6">
-                    Filter by State:
+                <div class="col-md-5 text-right"><h4>Filter by State:</h4>
                     <select id="filterStates">
                         <option value=""></option>
                     </select>
@@ -75,11 +57,20 @@
             <table id="dataDisplay" class="table table-hover">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Party</th>
-                        <th>State</th>
-                        <th>Seniority</th>
-                        <th>Votes with party</th>
+                        <th data-key="full_name" data-format="linkUrl">
+                            Name
+                        </th>
+                        <th data-key="party" data-format="plain">
+                            Party
+                        </th>
+                        <th data-key="state" data-format="plain">
+                            State
+                        </th>
+                        <th data-key="seniority" data-format="plain">Seniority
+                        </th>
+                        <th data-key="votes_with_party_pct" data-format="percent">
+                            Votes with party
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -87,7 +78,11 @@
             </table>
         </main>
         <footer>
-            <span class="glyphicon glyphicon-copyright-mark"></span> 2017 TGIF | All rights reserved
+            <span class="glyphicon glyphicon-copyright-mark"></span> 2017 TGIF | All rights reserved |
+            <span class="glyphicon glyphicon-envelope"></span>
+            <a href="mailto:info@tgif.net">
+                info@tgif.net
+            </a>
         </footer>
     </div>
     <script type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
