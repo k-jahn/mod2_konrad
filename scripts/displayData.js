@@ -1,4 +1,3 @@
-
 // define class for data handling
 function DataHandler() {
 
@@ -17,7 +16,7 @@ function DataHandler() {
         var optionArr = []
         this.states.forEach(x => {
             optionArr.push(
-                $('<option>').text(x.code + " : " + x.name).attr('value', x.code)
+                $('<option>').text(x.name + " : " + x.code).attr('value', x.code)
             );
         })
         $('#filterStates').append(optionArr)
@@ -48,12 +47,13 @@ function DataHandler() {
             .append(rowArr);
     };
 
-    // format memberlist as instances of Politicans
-    this.formatMembers = function() {
-        for (var i in this.members) {
-           this.members[i] = new Politician(this.members[i]);
-           this.members[i].init();
+    // sets this.members as array of initialized Politicans
+    this.formatMembers = function(members) {
+        for (var i in members) {
+           members[i] = new Politician(members[i]);
+           members[i].init();
         }
+        this.members=members
     }
 
     // fetch states.json and call displayStates
@@ -72,8 +72,7 @@ function DataHandler() {
         $.getJSON('data/proPublica/' + this.congress + '/' + this.chamber + '.json', function(data) {
             console.log('members.json loaded')
             that.raw=data;
-            that.members = that.raw.results[0].members;
-            that.formatMembers();
+            that.formatMembers(that.raw.results[0].members);
             that.displayMembers();
         });
     };
@@ -98,6 +97,7 @@ function DataHandler() {
 
 // define class Politician
 function Politician(data) {
+
     //store json data
     this.data=data; 
 
@@ -113,6 +113,7 @@ function Politician(data) {
                 return '<a href="'+that.data.url +'" target="_blank">'+that.data[key] +'<a>'
         }
     }
+
     // initialize politician, setting full_name
     this.init = function(){
         var name = [this.data.first_name]; // build full name
@@ -124,9 +125,10 @@ function Politician(data) {
 
 // create an instance of DataHandler
 var d = new DataHandler();
+$(function(){
+    // initialize it
+    d.init();
 
-// initialize it
-d.init();
-
-// set .change() event listener on <input> and <select> which redraws the table.
-$('input, select').change(() => d.displayMembers())
+    // set .change() event listener on <input> and <select> which redraws the table.
+    $('input, select').change(() => d.displayMembers())
+})

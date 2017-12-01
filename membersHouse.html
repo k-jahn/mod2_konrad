@@ -9,29 +9,10 @@
     <link rel="stylesheet" type="text/css" href="styles/main.css">
 </head>
 
-<body data-chamber="house">
+<body data-chamber="house" data-page="members">
     <div class="container-fluid siteWrapper">
         <header>
-            <a href="index.html">
-                <img src="images/logo.png">
-            </a>
-            <nav class="navbar navbar-inverse">
-                <div class="container-fluid">
-                    <ul class="nav navbar-nav">
-                        <li><a href="index.html">Home</a></li>
-                        <li class="dropdown active">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                Congress 113
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="senate.html?congress=113">Senate</a></li>
-                                <li class="active"><a href="house.html?congress=113">House</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            <!-- header inserted by js! -->
         </header>
         <main>
             <h2>
@@ -85,16 +66,16 @@
             </table>
         </main>
         <footer>
-            <span class="glyphicon glyphicon-copyright-mark"></span> 2017 TGIF | All rights reserved |
-            <span class="glyphicon glyphicon-envelope"></span>
-            <a href="mailto:info@tgif.net">
-                info@tgif.net
-            </a>
+            <!-- footer inserted by js!  -->
         </footer>
     </div>
+    <!-- load jQuery -->
     <script type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
-    <!-- bootstrap 3.3.7! -->
+    <!-- load bootstrap 3.3.7(!) -->
     <script src="scripts/bootstrap.min.js"></script>
+    <!-- load page builder to insert header and footer -->
+    <script type="text/javascript" src="scripts/buildPage.js"></script>
+    <!-- load dataDisplay script -->
     <script type="text/javascript" src="scripts/displayData.js"></script>
 </body>
 

@@ -6,6 +6,17 @@ body {
 .navbar {
 	border-radius: 0;
 }
+.inverse-dropdown{
+	background-color: #222;
+	border-color: #080808;
+}
+.inverse-dropdown>li>a{
+    color: #999;
+}
+.inverse-dropdown:hover{
+	color: #fff;background-color: #000;
+}
+
 .siteWrapper {
 	margin: 0 auto;
 	max-width: 1000px;
