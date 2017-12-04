@@ -4,9 +4,18 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- bootstrap 3.3.7! -->
+    <!-- bootstrap 3.3.7! css -->
     <link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="styles/main.css">
+    
+    <!-- load jQuery -->
+    <script type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
+    <!-- load page builder to insert header and footer -->
+    <script type="text/javascript" src="scripts/buildPage.js"></script>
+    <!-- load bootstrap 3.3.7(!) js -->
+    <script src="scripts/bootstrap.min.js"></script>
+    <!-- load dataDisplay script -->
+    <script type="text/javascript" src="scripts/displayData.js"></script>
 </head>
 
 <body data-chamber="house" data-page="loyalty">
@@ -23,7 +32,7 @@
                     </p>
                 </div>
                 <div class="col-sm-5">
-                    <h2>Senate at a glance</h2>
+                    <h2>House at a glance</h2>
                     <table>
                         <thead>
                             <tr>
@@ -55,40 +64,30 @@
             <hr />
             <div class="row">
                 <div class="col-sm-6">
-                    <h2>Least Loyal (Bottom 10% of Party)</h2>
-                    <table>
+                    <h2>Least Loyal</h2>
+                    <table class="memberTable table table-hover" data-filter="loyalBot">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Number Party Votes</th>
-                                <th>% Party Votes</th>
+                                <th data-key="full_name" data-format="linkUrl" >Name</th>
+                                <th># Party Votes</th>
+                                <th data-key="votes_with_party_pct" data-format="percent"  >% Party Votes</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>--</td>
-                                <td>--</td>
-                                <td>--</td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="col-sm-6">
-                    <h2>Most Loyal (Top 10% of Party)</h2>
-                    <table>
+                    <h2>Most Loyal</h2>
+                    <table  class="memberTable table table-hover" data-filter="loyalTop">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Number Party Votes</th>
-                                <th>% Party Votes</th>
+                                <th data-key="full_name" data-format="linkUrl" >Name</th>
+                                <th># Party Votes</th>
+                                <th data-key="votes_with_party_pct" data-format="percent">% Party Votes</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>--</td>
-                                <td>--</td>
-                                <td>--</td>
-                            </tr>
                     </table>
                 </div>
             </div>
@@ -97,14 +96,6 @@
             <!-- footer inserted by js!  -->
         </footer>
     </div>
-    <!-- load jQuery -->
-    <script type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
-    <!-- load bootstrap 3.3.7(!) -->
-    <script src="scripts/bootstrap.min.js"></script>
-    <!-- load page builder to insert header and footer -->
-    <script type="text/javascript" src="scripts/buildPage.js"></script>
-    <!-- load dataDisplay script -->
-    <script type="text/javascript" src="scripts/displayData.js"></script>
 </body>
 
 </html>

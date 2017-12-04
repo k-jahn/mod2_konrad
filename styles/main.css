@@ -1,5 +1,5 @@
 body {
-	font-size: 18px;
+	font-size: 16px;
 	/*background-color: #404 */
 }
 
@@ -16,6 +16,10 @@ body {
 .inverse-dropdown:hover{
 	color: #fff;background-color: #000;
 }
+.inverse-dropdown>.active>a{
+	background-color: #000;
+}
+
 
 .siteWrapper {
 	margin: 0 auto;
