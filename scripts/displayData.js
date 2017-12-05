@@ -1,8 +1,6 @@
 // define class for data handling
 function DataHandler() {
-
     // DataHandler properties
-
     this.raw = {};
     this.chamber = ''; //the chamber in question, taken from html
     this.congress = ''; //the congress in question, taken from html
@@ -21,7 +19,6 @@ function DataHandler() {
             that.displayStats($(this))
         })
     }
-
 
     // display function to build the states dropdown
     this.displayStates = function() {
@@ -57,9 +54,7 @@ function DataHandler() {
                 }
                 $(this).html(n)
             }
-
         })
-
     }
 
     // display function to build the table
@@ -121,9 +116,6 @@ function DataHandler() {
             var sortedMembers=this.sortMembers(members.filter((x)=>x.show('total_votes')!=0),table)
             return crawl(sortedMembers,"missed_votes_pct")
         }
-
-
-
         return members
     }
 
@@ -147,7 +139,6 @@ function DataHandler() {
 
     // sets this.members as array of initialized Politicans
     this.formatMembers = function(members) {
-        
         for (var i in members) {
             this.members.push(new Politician(members[i]));
             this.members[i].init();
@@ -195,10 +186,8 @@ function DataHandler() {
 
 // define class Politician
 function Politician(data) {
-
     //store json data
     this.data = data;
-
     // method that returns formatted data 
     this.show = function(key, format) {
         var that = this;
@@ -211,8 +200,7 @@ function Politician(data) {
                 return '<a href="' + that.data.url + '" target="_blank">' + that.data[key] + '<a>'
         }
     }
-
-    // initialize politician
+    // initialize, calculate additional values
     this.init = function() {
         //set full_name
         var name = [this.data.first_name];
@@ -229,7 +217,6 @@ var d = new DataHandler();
 $(function() {
     // initialize it
     d.init();
-
     // set .change() event listener on <input> and <select> which redraws the table.
     $('input, select').change(() => d.displayHandler())
 })
