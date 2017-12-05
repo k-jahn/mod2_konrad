@@ -27,29 +27,29 @@
                 </div>
                 <div class="col-sm-5">
                     <h2>Senate at a glance</h2>
-                    <table>
+                   <table class="statsTable">
                         <thead>
                             <tr>
-                                <th>Party</th>
-                                <th>Number of Reps</th>
-                                <th>% Voted with Prty</th>
+                                <th class="col-xs-6">Party</th>
+                                <th class="col-xs-3"># of Reps</th>
+                                <th class="col-xs-3">Missed Votes</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Republican</td>
-                                <td>--</td>
-                                <td>--</td>
+                                <td class="statsField" data-party="R">--</td>
+                                <td class="statsField" data-party="R" data-key="missed_votes_pct">--</td>
                             </tr>
                             <tr>
                                 <td>Democrat</td>
-                                <td>--</td>
-                                <td>--</td>
+                                <td class="statsField" data-party="D">--</td>
+                                <td class="statsField" data-party="D" data-key="missed_votes_pct">--</td>
                             </tr>
                             <tr>
                                 <td>Independent</td>
-                                <td>--</td>
-                                <td>--</td>
+                                <td class="statsField" data-party="I">--</td>
+                                <td class="statsField" data-party="I" data-key="missed_votes_pct">--</td>
                             </tr>
                         </tbody>
                     </table>
@@ -58,13 +58,13 @@
             <hr />
             <div class="row">
                 <div class="col-sm-6">
-                    <h2>Least Engaged (Bottom 10% Attendance)</h2>
-                    <table>
+                    <h2>Least Engaged</h2>
+                    <table class="memberTable table table-hover" data-filter="arbitraryAttendance" data-sortkey="missed_votes_pct">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Number of Missed Votes</th>
-                                <th>% Missed</th>
+                                <th class="col-xs-6" data-key="full_name" data-format="linkUrl" >Name</th>
+                                <th class="col-xs-3" data-key="missed_votes_pct"># Missed Votes</th>
+                                <th class="col-xs-3" data-key="missed_votes_pct" data-format="percent">% Missed</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -72,17 +72,16 @@
                     </table>
                 </div>
                 <div class="col-sm-6">
-                    <h2>Most Engaged (Top 10% Attendance)</h2>
-                    <table>
+                    <h2>Most Engaged</h2>
+                    <table  class="memberTable table table-hover" data-filter="arbitraryAttendance" data-sortneg="true" data-sortkey="missed_votes_pct">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Number of Missed Votes</th>
-                                <th>% Missed</th>
+                                <th class="col-xs-6" data-key="full_name" data-format="linkUrl" >Name</th>
+                                <th class="col-xs-3" data-key="missed_votes"># Missed Votes</th>
+                                <th class="col-xs-3" data-key="missed_votes_pct" data-format="percent">% Missed</th>
                             </tr>
                         </thead>
                         <tbody>
-                        </tbody>
                     </table>
                 </div>
             </div>

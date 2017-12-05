@@ -33,29 +33,29 @@
                 </div>
                 <div class="col-sm-5">
                     <h2>House at a glance</h2>
-                    <table>
+                    <table class="statsTable">
                         <thead>
                             <tr>
-                                <th>Party</th>
-                                <th>Number of Reps</th>
-                                <th>% Voted with Prty</th>
+                                <th class="col-xs-6">Party</th>
+                                <th class="col-xs-3"># of Reps</th>
+                                <th class="col-xs-3">Party Votes</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Republican</td>
-                                <td>--</td>
-                                <td>--</td>
+                                <td class="statsField" data-party="R">--</td>
+                                <td class="statsField" data-party="R" data-key="votes_with_party_pct">--</td>
                             </tr>
                             <tr>
                                 <td>Democrat</td>
-                                <td>--</td>
-                                <td>--</td>
+                                <td class="statsField" data-party="D">--</td>
+                                <td class="statsField" data-party="D" data-key="votes_with_party_pct">--</td>
                             </tr>
                             <tr>
                                 <td>Independent</td>
-                                <td>--</td>
-                                <td>--</td>
+                                <td class="statsField" data-party="I">--</td>
+                                <td class="statsField" data-party="I" data-key="votes_with_party_pct">--</td>
                             </tr>
                         </tbody>
                     </table>
@@ -65,12 +65,12 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h2>Least Loyal</h2>
-                    <table class="memberTable table table-hover" data-filter="loyalBot">
+                    <table class="memberTable table table-hover" data-filter="arbitraryLoyalty" data-sortkey="votes_with_party_pct">
                         <thead>
                             <tr>
-                                <th data-key="full_name" data-format="linkUrl" >Name</th>
-                                <th># Party Votes</th>
-                                <th data-key="votes_with_party_pct" data-format="percent"  >% Party Votes</th>
+                                <th class="col-xs-6" data-key="full_name" data-format="linkUrl" >Name</th>
+                                <th class="col-xs-3" data-key="party_votes"># Party Votes</th>
+                                <th class="col-xs-3" data-key="votes_with_party_pct" data-format="percent">% Party Votes</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -79,12 +79,12 @@
                 </div>
                 <div class="col-sm-6">
                     <h2>Most Loyal</h2>
-                    <table  class="memberTable table table-hover" data-filter="loyalTop">
+                    <table  class="memberTable table table-hover" data-filter="arbitraryLoyalty" data-sortneg="true" data-sortkey="votes_with_party_pct">
                         <thead>
                             <tr>
-                                <th data-key="full_name" data-format="linkUrl" >Name</th>
-                                <th># Party Votes</th>
-                                <th data-key="votes_with_party_pct" data-format="percent">% Party Votes</th>
+                                <th class="col-xs-6" data-key="full_name" data-format="linkUrl" >Name</th>
+                                <th class="col-xs-3" data-key="party_votes"># Party Votes</th>
+                                <th class="col-xs-3" data-key="votes_with_party_pct" data-format="percent">% Party Votes</th>
                             </tr>
                         </thead>
                         <tbody>
