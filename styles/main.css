@@ -38,8 +38,8 @@ footer {
 	margin-top: 20px;
 }
 
-.filterContainer {
-	margin: 2em 0;
+.filterContainer div {
+	margin-top: 1em;
 }
 .collapseLink {
 	color: #000;
@@ -62,4 +62,14 @@ h4 {
 	display: inline;
 	margin-right: 1em;
 	font-weight: bold;
+}
+
+.sortIcon {
+	cursor: pointer;
+	color: rgba(0,0,0,0.5);
+}
+
+.sortIcon.active {
+	cursor: auto;
+	color: rgba(0,0,0,1);
 }

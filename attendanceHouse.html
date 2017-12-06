@@ -3,10 +3,25 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- bootstrap 3.3.7! -->
+    <!-- load styles -->
+    <!-- bootstrap 3.3.7(!) -->
     <link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
+    <!-- colorbox -->
+    <link rel="stylesheet" type="text/css" href="styles/colorbox.css">
+    <!-- my css -->
     <link rel="stylesheet" type="text/css" href="styles/main.css">
+
+    <!-- top-loading scripts (with dom ready brakes^^) -->
+    <!-- jquery -->
+    <script type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
+    <!-- load bootstrap 3.3.7(!) -->
+    <script src="scripts/bootstrap.min.js"></script>
+    <!-- load page builder to insert header and footer -->
+    <script type="text/javascript" src="scripts/buildPage.js"></script>
+    <!-- load jquery colorbox plugin -->
+    <script type="text/javascript" src="scripts/jquery.colorbox-min.js"></script>
+    <!-- load dataDisplay script -->
+    <script type="text/javascript" src="scripts/displayData.js"></script>
 </head>
 
 <body data-chamber="house" data-page="attendance">
@@ -16,7 +31,7 @@
         </header>
         <main>
             <div class="row">
-                <div class="col-sm-7">
+                <div class="col-sm-6">
                     <h2>Attendance</h2>
                     <p>
                         The Constitution specifies that a majority of members constitutes a quorum to do business in each house. Representatives and senators rarely force the presence of a quorum by demanding quorum calls; thus, in most cases, debates continue even if a majority is not present.
@@ -25,9 +40,10 @@
                         The House reserves roll-call votes for the most formal matters, as a roll-call of all 435 representatives takes quite some time; normally, members vote by electronic device. In the case of a tie, the motion in question fails.
                     </p>
                 </div>
+                <div class="col-sm-1"></div>
                 <div class="col-sm-5">
                     <h2>House at a glance</h2>
-                     <table class="statsTable">
+                     <table class="statsTable table">
                         <thead>
                             <tr>
                                 <th class="col-xs-6">Party</th>
@@ -58,8 +74,8 @@
             <hr />
             <div class="row">
                 <div class="col-sm-6">
-                    <h2>Least Engaged</h2>
-                    <table class="memberTable table table-hover" data-filter="arbitraryAttendance" data-sortkey="missed_votes_pct">
+                    <h2>Least Engaged <small>(bottom 10%)</small></h2>
+                    <table class="memberTable table table-hover" data-filter="extremeAttendance" data-sortkey="missed_votes_pct">
                         <thead>
                             <tr>
                                 <th class="col-xs-6" data-key="full_name" data-format="linkUrl" >Name</th>
@@ -72,8 +88,8 @@
                     </table>
                 </div>
                 <div class="col-sm-6">
-                    <h2>Most Engaged</h2>
-                    <table  class="memberTable table table-hover" data-filter="arbitraryAttendance" data-sortneg="true" data-sortkey="missed_votes_pct">
+                    <h2>Most Engaged <small>(top 10%)</small></h2>
+                    <table  class="memberTable table table-hover" data-filter="extremeAttendance" data-sortneg="true" data-sortkey="missed_votes_pct">
                         <thead>
                             <tr>
                                 <th class="col-xs-6" data-key="full_name" data-format="linkUrl" >Name</th>
@@ -90,14 +106,6 @@
             <!-- footer inserted by js!  -->
         </footer>
     </div>
-    <!-- load jQuery -->
-    <script type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
-    <!-- load bootstrap 3.3.7(!) -->
-    <script src="scripts/bootstrap.min.js"></script>
-    <!-- load page builder to insert header and footer -->
-    <script type="text/javascript" src="scripts/buildPage.js"></script>
-    <!-- load dataDisplay script -->
-    <script type="text/javascript" src="scripts/displayData.js"></script>
 </body>
 
 </html>

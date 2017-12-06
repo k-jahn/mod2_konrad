@@ -3,8 +3,25 @@
 
 <head>
     <meta charset="utf-8">
+    <!-- load styles -->
+    <!-- bootstrap 3.3.7(!) -->
     <link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
+    <!-- colorbox -->
+    <link rel="stylesheet" type="text/css" href="styles/colorbox.css">
+    <!-- my css -->
     <link rel="stylesheet" type="text/css" href="styles/main.css">
+
+    <!-- top-loading scripts (with dom ready brakes^^) -->
+    <!-- jquery -->
+    <script type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
+    <!-- load bootstrap 3.3.7(!) -->
+    <script src="scripts/bootstrap.min.js"></script>
+    <!-- load page builder to insert header and footer -->
+    <script type="text/javascript" src="scripts/buildPage.js"></script>
+    <!-- load jquery colorbox plugin -->
+    <script type="text/javascript" src="scripts/jquery.colorbox-min.js"></script>
+    <!-- load dataDisplay script -->
+    <script type="text/javascript" src="scripts/displayData.js"></script>
 </head>
 
 <body data-chamber="senate" data-page="members">
@@ -17,25 +34,33 @@
             <p>
                 First convened in 1789, the composition and powers of the Senate are established in Article One of the U.S. Constitution. Each state is represented by two senators, regardless of population, who serve staggered six-year terms. The Senate has several exclusive powers not granted to the House, including consenting to treaties as a precondition to their ratification and consenting to or confirming appointments of Cabinet secretaries, federal judges, other federal executive officials, military officers, regulatory officials, ambassadors, and other federal uniformed officers, as well as trial of federal officials impeached by the House.
             </p>
-            <div class="row filterContainer">
-                <div class="col-md-7"><h4>Filter by Party:</h4>
-                    <label class="checkbox-inline">
-                        <input type="checkbox" id="filterR" name="" checked> Republican
-                    </label>
-                    <label class="checkbox-inline">
-                        <input type="checkbox" id="filterD" name="" checked> Democrat
-                    </label>
-                    <label class="checkbox-inline">
-                        <input type="checkbox" id="filterI" name="" checked> Independent
-                    </label>
+             <div class="filterContainer">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h4>Filter by Party:</h4>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="filterR" name="" checked> Republican
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="filterD" name="" checked> Democrat
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="filterI" name="" checked> Independent
+                        </label>
+                    </div>
+                    <div class="col-md-5 text-right">
+                        <h4>Filter by State:</h4>
+                        <select id="filterStates">
+                            <option value=""></option>
+                        </select>
+                    </div>
                 </div>
-                <div class="col-md-5 text-right"><h4>Filter by State:</h4>
-                    <select id="filterStates">
-                        <option value=""></option>
-                    </select>
+                <div class="text-right">
+                    <h4>Search:</h4>
+                    <input type="text" id="filterSearch">
                 </div>
             </div>
-            <table class="table table-hover memberTable" data-filter="userInput">
+            <table class="table table-hover memberTable sortable searchable" data-filter="userInput"  data-sortkey="last_name" data-sortneg="">
                 <thead>
                     <tr>
                         <th data-key="full_name" data-format="linkUrl" class="col-xs-4">
@@ -50,7 +75,7 @@
                         <th data-key="seniority" data-format="plain" class="col-xs-2">Seniority
                         </th>
                         <th data-key="votes_with_party_pct" data-format="percent"  class="col-xs-2">
-                            Votes with party
+                            Party Votes
                         </th>
                     </tr>
                 </thead>
@@ -62,14 +87,6 @@
             <!-- footer inserted by js!  -->
         </footer>
     </div>
-    <!-- load jQuery -->
-    <script type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
-    <!-- load bootstrap 3.3.7(!) -->
-    <script src="scripts/bootstrap.min.js"></script>
-    <!-- load page builder to insert header and footer -->
-    <script type="text/javascript" src="scripts/buildPage.js"></script>
-    <!-- load dataDisplay script -->
-    <script type="text/javascript" src="scripts/displayData.js"></script>
 </body>
 
 </html>
