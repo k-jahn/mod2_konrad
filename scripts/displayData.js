@@ -181,13 +181,18 @@ function DataHandler() {
     this.filterMembers = function(members,table) {
         //filter from inputs
         if (table.data('filter')=='userInput'){
+            // get checkbox values
             var party = {
                 'D': $('#filterD').is(":checked"),
                 'R': $('#filterR').is(":checked"),
                 'I': $('#filterI').is(":checked")
             }
+            // get select value
             var state = $('#filterStates').first().val();
-            var search = $('#filterSearch').first().val();
+            // get and sanitize text field value
+            var search = $('#filterSearch').first().val()
+                .replace(/[^A-Za-z0-9.]/g,"")
+                .replace(/\./g,"\\.");
             search = search? new RegExp(search,'i'):false;
             if (search) console.log('table search filter active')
             return members.filter(function(member){
