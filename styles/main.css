@@ -2,7 +2,10 @@ body {
 	font-size: 16px;
 	/*background-color: #404 */
 }
-
+.logoWrapper {
+	display: block;
+	width: 300px;
+}
 .navbar {
 	border-radius: 0;
 }
@@ -20,10 +23,11 @@ body {
 	background-color: #000;
 }
 
-
 .siteWrapper {
-	margin: 0 auto;
+	margin: 1em auto;
 	max-width: 1000px;
+	border: 1px solid black;
+	box-shadow: 4px 4px 4px rgba(0,0,0,0.6)
 }
 main {
 	padding: 1em;
@@ -35,29 +39,39 @@ footer {
 	border: 1px solid #080808;
 	color: #fff;
 	background-color: #222;
-	margin-top: 20px;
+	margin: 1em 0;
+}
+
+img {
+	display: block;
+	top:0;
+	left:0;
+	width: 100%;
+}
+
+aside {
+	margin-top: 2em;
+}
+
+hr {
+	border: 1px solid rgba(0,0,0,0.2);
+}
+
+.filterContainer {
+	margin: 1em 0;
 }
 
 .filterContainer div {
 	margin-top: 1em;
 }
-.collapseLink {
-	color: #000;
-}
-.collapseLink:hover {
-	color: #222;
-	text-decoration: none;
-}
-.collapseLink:focus {
-	color: #000;
-	text-decoration: none;
-}
-.logoWrapper {
-	display: inline;
+.checkbox {
+	margin-top: 0;
+	font-weight: normal;
 }
 .mail {
 	display: inline-block;
 }
+
 h4 {
 	display: inline;
 	margin-right: 1em;

@@ -10,7 +10,6 @@
     <link rel="stylesheet" type="text/css" href="styles/colorbox.css">
     <!-- my css -->
     <link rel="stylesheet" type="text/css" href="styles/main.css">
-
     <!-- top-loading scripts (with dom ready brakes^^) -->
     <!-- jquery -->
     <script type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
@@ -34,33 +33,39 @@
             <p>
                 First convened in 1789, the composition and powers of the Senate are established in Article One of the U.S. Constitution. Each state is represented by two senators, regardless of population, who serve staggered six-year terms. The Senate has several exclusive powers not granted to the House, including consenting to treaties as a precondition to their ratification and consenting to or confirming appointments of Cabinet secretaries, federal judges, other federal executive officials, military officers, regulatory officials, ambassadors, and other federal uniformed officers, as well as trial of federal officials impeached by the House.
             </p>
-             <div class="filterContainer">
+            <div class="filterContainer">
                 <div class="row">
-                    <div class="col-md-7">
-                        <h4>Filter by Party:</h4>
-                        <label class="checkbox-inline">
-                            <input type="checkbox" id="filterR" name="" checked> Republican
-                        </label>
-                        <label class="checkbox-inline">
-                            <input type="checkbox" id="filterD" name="" checked> Democrat
-                        </label>
-                        <label class="checkbox-inline">
-                            <input type="checkbox" id="filterI" name="" checked> Independent
-                        </label>
+                    <div class="col-xs-7 row">
+                        <div class="col-xs-4">
+                            <h4>Filter by Party:</h4>
+                        </div>
+                        <div class="col-xs-8">
+                            <label class="checkbox">
+                                <input type="checkbox" id="filterR" name="" checked> Republican
+                            </label>
+                            <label class="checkbox">
+                                <input type="checkbox" id="filterD" name="" checked> Democrat
+                            </label>
+                            <label class="checkbox">
+                                <input type="checkbox" id="filterI" name="" checked> Independent
+                            </label>
+                        </div>
                     </div>
-                    <div class="col-md-5 text-right">
-                        <h4>Filter by State:</h4>
-                        <select id="filterStates">
-                            <option value=""></option>
-                        </select>
+                    <div class="col-xs-5 text-right">
+                        <div>
+                            <h4>Filter by State:</h4>
+                            <select id="filterStates">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div>
+                            <h4>Search:</h4>
+                            <input type="text" id="filterSearch">
+                        </div>
                     </div>
-                </div>
-                <div class="text-right">
-                    <h4>Search:</h4>
-                    <input type="text" id="filterSearch">
                 </div>
             </div>
-            <table class="table table-hover memberTable sortable searchable" data-filter="userInput"  data-sortkey="last_name" data-sortneg="">
+            <table class="table table-hover memberTable sortable searchable" data-filter="userInput" data-sortkey="last_name" data-sortneg="">
                 <thead>
                     <tr>
                         <th data-key="full_name" data-format="linkUrl" class="col-xs-4">
@@ -74,7 +79,7 @@
                         </th>
                         <th data-key="seniority" data-format="plain" class="col-xs-2">Seniority
                         </th>
-                        <th data-key="votes_with_party_pct" data-format="percent"  class="col-xs-2">
+                        <th data-key="votes_with_party_pct" data-format="percent" class="col-xs-2">
                             Party Votes
                         </th>
                     </tr>
