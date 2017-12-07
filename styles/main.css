@@ -1,7 +1,23 @@
+/*general*/
 body {
 	font-size: 16px;
 	/*background-color: #404 */
 }
+img {
+	display: block;
+	top:0;
+	left:0;
+	width: 100%;
+}
+
+.siteWrapper {
+	margin: 1em auto;
+	max-width: 1000px;
+	border: 1px solid black;
+	box-shadow: 4px 4px 4px rgba(0,0,0,0.6)
+}
+
+/*header*/
 .logoWrapper {
 	display: block;
 	width: 300px;
@@ -23,32 +39,10 @@ body {
 	background-color: #000;
 }
 
-.siteWrapper {
-	margin: 1em auto;
-	max-width: 1000px;
-	border: 1px solid black;
-	box-shadow: 4px 4px 4px rgba(0,0,0,0.6)
-}
+/*main*/
 main {
 	padding: 1em;
 }
-
-footer {
-	text-align: center;
-	padding: 10px;
-	border: 1px solid #080808;
-	color: #fff;
-	background-color: #222;
-	margin: 1em 0;
-}
-
-img {
-	display: block;
-	top:0;
-	left:0;
-	width: 100%;
-}
-
 aside {
 	margin-top: 2em;
 }
@@ -56,7 +50,24 @@ aside {
 hr {
 	border: 1px solid rgba(0,0,0,0.2);
 }
+/*party labels*/
+.labelDem {
+	color: blue;
+}
 
+.labelRep {
+	color:red;
+}
+.labelInd {
+
+}
+
+/*- search hits*/
+.searchHit {
+	font-weight: bold;
+}
+
+/*- user inputs*/
 .filterContainer {
 	margin: 1em 0;
 }
@@ -68,16 +79,13 @@ hr {
 	margin-top: 0;
 	font-weight: normal;
 }
-.mail {
-	display: inline-block;
-}
 
 h4 {
 	display: inline;
 	margin-right: 1em;
 	font-weight: bold;
 }
-
+ /*- sort icons*/
 .sortIcon {
 	cursor: pointer;
 	color: rgba(0,0,0,0.5);
@@ -86,4 +94,17 @@ h4 {
 .sortIcon.active {
 	cursor: auto;
 	color: rgba(0,0,0,1);
+}
+
+/*footer*/
+footer {
+	text-align: center;
+	padding: 10px;
+	border: 1px solid #080808;
+	color: #fff;
+	background-color: #222;
+	margin: 1em 0;
+}
+.mail {
+	display: inline-block;
 }

@@ -38,46 +38,19 @@
             <p>
                 Each U.S. state is represented in the House in proportion to its population as measured in the census, but every state is entitled to at least one representative.
             </p>
-            <div class="filterContainer">
-                <div class="row">
-                    <div class="col-md-7">
-                        <h4>Filter by Party:</h4>
-                        <label class="checkbox-inline">
-                            <input type="checkbox" id="filterR" name="" checked> Republican
-                        </label>
-                        <label class="checkbox-inline">
-                            <input type="checkbox" id="filterD" name="" checked> Democrat
-                        </label>
-                        <label class="checkbox-inline">
-                            <input type="checkbox" id="filterI" name="" checked> Independent
-                        </label>
-                    </div>
-                    <div class="col-md-5 text-right">
-                        <h4>Filter by State:</h4>
-                        <select id="filterStates">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="text-right">
-                    <h4>Search:</h4>
-                    <input type="text" id="filterSearch">
-                </div>
-            </div>
             <table class="table table-hover memberTable sortable" data-filter="userInput" data-sortkey="last_name" data-sortneg="">
                 <thead>
                     <tr>
                         <th data-key="full_name" data-format="linkUrl" class="col-xs-4">
                             Name
                         </th>
-                        <th data-key="party" data-format="plain" class="col-xs-2">
+                        <th data-key="party" data-format="party" class="col-xs-2">
                             Party
                         </th>
                         <th data-key="state" data-format="plain" class="col-xs-2">
                             State
                         </th>
-                        <th data-key="seniority" data-format="plain" class="col-xs-2">Seniority
+                        <th data-key="seniority" data-format="years" class="col-xs-2">Seniority
                         </th>
                         <th data-key="votes_with_party_pct" data-format="percent" class="col-xs-2">
                             Party Votes

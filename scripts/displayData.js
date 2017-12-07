@@ -1,67 +1,97 @@
 // define class for data handling
 function DataHandler() {
     // DataHandler properties
-    this.raw = {};
     this.chamber = ''; //the chamber in question, taken from html
     this.congress = ''; //the congress in question, taken from html
     this.members = []; //members list, filled with json data
     this.states = []; //the states list. filled with json data
-
+    // set intitial user filter values
+    this.filterStatus = {
+        'D': true,
+        'R': true,
+        'I': true,
+        'state': ""
+    }
+    // Politician who owns the lookupTable
+    this.searchHitTable = [];
     // DataHandler Methods
 
     // init(), sets needed values&calls fetches
     this.init = function() {
-        //get url.params - overkill, but extendable
-        var urlPars = {}
-        document.URL.replace(
-            /([^?&=#]+)=([^&=#]+)/g,
-            (a, b, c) => {
-                urlPars[b] = c;
-            }
-        )
         //assign values
         this.chamber = $('body').data('chamber');
-        this.congress = urlPars.congress || 113;
-        //call fetch functions
-        this.fetchMembers();
-        //build table sortSearch
-        var that=this;
+        // get congress from sessionStorage!
+        this.congress = sessionStorage.congress || 113;
+        //get members JSON
+        this.loadMembers();
     }
     
     // fetch members.json and call displayMembers
-    this.fetchMembers = function() {
-        var that = this;
-        $.getJSON('data/proPublica/' + this.congress + '/' + this.chamber + '.json', function(data) {
+    this.loadMembers = function() {
+        var that=this;
+        // build jsonURL
+        var jsonURL='data/proPublica/' + this.congress + '/' + this.chamber + '.json'
+        // callback for when data has been loaded
+        var callback = function(data){
             console.log('members.json loaded')
-            that.raw = data;
-            that.formatMembers(that.raw.results[0].members);
+            // sets this.members as array of initialized Politicans
+            for (var i in data.results[0].members) {
+                that.members.push(new Politician(data.results[0].members[i],that));
+                that.members[i].init();
+            }
             that.initDisplay();
+        }
+
+        var that = this;
+        // if (!localStorage[jsonURL] || ])
+        $.getJSON(jsonURL, function(data) {
+            
+            callback(data)
+            // put in local storage
+            console.log('got JSON from server, saving in localStorage')
+            localStorage.setItem(jsonURL,JSON.stringify(data))
+            // timestamp
+            localStorage.setItem(jsonURL+'.timeStamp',Date.now().toString())
         });
     };
     
     // fetch states.json and call displayStates
     this.fetchStates = function() {
-        var that = this;
-        $.getJSON('data/states.json', function(data) {
-            console.log('states.json loaded')
-            that.states = data;
-            that.displayStates();
-        });
+        var data = localStorage.getItem('data/states.json') || false
+        if (data) {
+            console.log('found states.json in local storage')
+            this.states=JSON.parse(data);
+            this.displayStates();
+        } else {
+            var that = this;
+            $.getJSON('data/states.json', function(data) {
+                that.states = data;
+                that.displayStates();
+                localStorage.setItem('data/states.json',JSON.stringify(that.states))
+                console.log('states.json loaded from server, cached in localData')
+            });
+        }
     };
 
     //searches document for tables to display data, calls appropriate methods
     this.initDisplay = function() {
         var that = this
+        // find member tables
         $('.memberTable').each(function() {
+            // if table filterable by user input, call f() on it to add and bind interface elements
             if ($(this).data('filter')=="userInput") {
                 that.initUserInput($(this))
             }
+            // if sortable, call f() to add and bind interface elements
             if ($(this).hasClass('sortable')){
                 that.initSort($(this))
             }
+            // draw the actual table
             that.displayMembers($(this))
         })
+        // find stats tables ...
         $('.statsTable').each(function() {
+            // ...and draw them
             that.displayStats($(this))
         })
     }
@@ -98,24 +128,52 @@ function DataHandler() {
 
     //binds user-adjustable filter inputs
     this.initUserInput = function(table){
-        console.log('initializing user input filter functionality')
-        // get (and call display) the states list for the select dropdown
-        this.fetchStates();
-        // set .change() event listener on <input> and <select> which redraws the table.
-        $('input[type="checkbox"], select').change(() => this.displayMembers(table))
-        $('input[type="text"]').on('keyup',() => this.displayMembers(table))
+        var that = this;
+        console.log('initializing adjustable filter interface')
+        //set searchServer
+        //insert html for filter inputs
+        table.before($('<div>').addClass('filterContainer').load('pageModules/filterInterface.html',function(){
+            // get and display the states list for the select dropdown
+            that.fetchStates();
+            // set .change() event listener on <input> and <select> which stores value redraws the table.
+            $(this).find('input[type="checkbox"]').change(function(){
+                // store usr input
+                that.filterStatus[$(this).data('filtername')]=$(this).is(":checked"),
+                console.log('assigned '+that.filterStatus[$(this).data('filtername')]+' to filterStatus.' +$(this).data('filtername'))
+                // redraw table
+                that.displayMembers(table)
+            })
+            $(this).find('select').change(function(){
+                // store usr input
+                that.filterStatus[$(this).data('filtername')]=$(this).val(),
+                console.log('assigned '+that.filterStatus[$(this).data('filtername')]+' to filterStatus.' +$(this).data('filtername'))
+                // redraw table
+                that.displayMembers(table)
+            })
+            $(this).find('input[type="text"]').on('keyup',function(){ 
+                //sanitize and store user input
+                that.filterStatus[$(this).data('filtername')]=$(this).val()
+                    .replace(/[^A-Za-z0-9. ]/g,"")
+                    .replace(/\./g,"\\.");
+                console.log('assigned '+that.filterStatus[$(this).data('filtername')]+' to filterStatus.' +$(this).data('filtername'))
+                // redraw table
+                that.displayMembers(table)
+            })
+        }))
     }
 
     // display function to build the table
     this.displayMembers = function(table) {
         //empty array for built rows
         var rowArr = [];
+        //clone members
+        var tableMembers=this.members
+
         //filter members who should appear in table
-        console.log('filtering ' +this.members.length)
-        var tableMembers = this.filterMembers(this.members,table)
-        console.log('returning ' +tableMembers.length)
+        tableMembers = this.filterMembers(tableMembers,table)
+        console.log('filtering" '+this.members.length+ ' returning: ' +tableMembers.length)
         //sort members
-        var tableMembers = this.sortMembers(tableMembers,table)
+        tableMembers = this.sortMembers(tableMembers,table)
         // get data columns
         var columns = table.find('th')
         //loop to build individual rows and push them to rowArr
@@ -125,7 +183,7 @@ function DataHandler() {
             for (var i = 0; i < columns.length; i++) {
                 var content = member.show(columns[i].dataset.key, columns[i].dataset.format)
                 row.append(
-                    $('<td>').html(content)
+                    $('<td>').append(content)
                 );
             }
             //push row to element array
@@ -134,10 +192,6 @@ function DataHandler() {
         //clear tbody and insert row array
         table.find('tbody').html('')
             .append(rowArr);
-        //colorboxerize(tm) it - mb move to politician?
-        table.find('a').each(function(i,link){
-            $(link).colorbox({iframe:true, width:"80%", height:"80%"});
-        })
     };
 
     // diplay function to build stats table
@@ -174,44 +228,48 @@ function DataHandler() {
                 $('<option>').text(x.name + " : " + x.code).attr('value', x.code)
             );
         })
-        $('#filterStates').append(optionArr)
+        $('#statesSelect').append(optionArr)
     }
 
     // filter members array before display in table
     this.filterMembers = function(members,table) {
+        var that=this;
         //filter from inputs
         if (table.data('filter')=='userInput'){
-            // get checkbox values
-            var party = {
-                'D': $('#filterD').is(":checked"),
-                'R': $('#filterR').is(":checked"),
-                'I': $('#filterI').is(":checked")
+            var that=this
+            var search = this.filterStatus.search? new RegExp(this.filterStatus.search,'ig'):false;
+            // clear search hits
+            this.searchHitTable=[]
+            if (search){
+                console.log('table search filter active')
+                //only searching full name atm 
+                var searchFields = ['full_name']
             }
-            // get select value
-            var state = $('#filterStates').first().val();
-            // get and sanitize text field value
-            var search = $('#filterSearch').first().val()
-                .replace(/[^A-Za-z0-9.]/g,"")
-                .replace(/\./g,"\\.");
-            search = search? new RegExp(search,'i'):false;
-            if (search) console.log('table search filter active')
+            // actual filter
             return members.filter(function(member){
-                if (!party[member.show('party')]) return false
-                if (state && state != member.show('state')) return false
+                // check party
+                if (!that.filterStatus[member.show('party')]) return false
+                // check state
+                if (that.filterStatus.state && that.filterStatus.state != member.show('state')) return false
+                // check if search field is in use (expensive!)
                 if (search){
+                    //clear hit table
                     var hide = true
-                    //ugly... repeating myself - select fields to search in
-                    var searchFields = table
-                        .find('th')
-                        .map(function(){return $(this).data('key')})
+                    // go through search fields
                     for (var key of searchFields) {
-                        if (member.show(key).toString().match(search)) {
+                        //don't search parties (theres a checkbox :)
+                        if (key=='party') continue
+                        if (search.test(member.show(key).toString())) {
                             hide=false
-                            break;
+                            // save match to lookup table
+                            let entry = {'id':member.show('id')}
+                            entry[key]= member.show(key).toString().replace(search,(x)=>'<span class="searchHit">'+x+'</span>')
+                            that.searchHitTable.push(entry)
                         }
                     }
                     if (hide) return false
                 }
+                // and if no filter kicked the member out...
                 return true
             })
         }
@@ -222,7 +280,7 @@ function DataHandler() {
             while(list[n+1].show(key)==list[n].show(key))n++
             return list.slice(0,n)
         }
-
+        // filters
         if (table.data('filter')=='extremeLoyalty'){
             var sortedMembers=this.sortMembers(members.filter((x)=>x.show('total_votes')!=0),table)
             return crawl(sortedMembers,"votes_with_party_pct")
@@ -250,35 +308,71 @@ function DataHandler() {
         if (sortNeg) sortedMembers=sortedMembers.reverse()
         return sortedMembers
     }
-
-    // sets this.members as array of initialized Politicans
-    this.formatMembers = function(members) {
-        for (var i in members) {
-            this.members.push(new Politician(members[i]));
-            this.members[i].init();
-        }
-    }
-
 }
 
 // define class Politician
-function Politician(data) {
+function Politician(data,parent) {
     //store json data
     this.data = data;
+    //store parent
+    this.parent=parent;
     // method that returns formatted data 
     this.show = function(key, format) {
-        var that = this;
+        var value = this.data[key]
+        //check if there's a searchHit
+        for (var hit of parent.searchHitTable) {
+            if (this.data.id==hit.id && hit.hasOwnProperty(key)) {
+                value=hit[key]
+                break
+            }
+        }
         switch (format || 'plain') {
+            //plain text
             case 'plain':
-                return that.data[key];
+                return value;
+            //party abbreviations
+            case 'party':
+                switch (value) {
+                    case 'D':
+                        return $('<span>').text('Dem.').addClass('labelDem')
+                    case 'R':
+                        return $('<span>').text('Rep.').addClass('labelRep')
+                    case 'I':
+                        return $('<span>').text('Ind.').addClass('labelInd')
+                    default:
+                        return 'A miracle!'
+                }
+            // percent values with fixed accuracy
             case 'percent':
-                return that.data[key].toFixed(1) + '%';
+                return value.toFixed(1) + '%';
+            // years
+            case 'years' :
+                if (value==0) {
+                    return 'none'
+                }
+                if (value==1) {
+                    return value + ' year';
+                }
+                return value + ' years';
+            // as colorbox link to homepage
             case 'linkUrl':
-                return '<a href="' + that.data.url + '">' + that.data[key] + '<a>'
+                return $('<a>')
+                    .attr('href',this.data.url)
+                    .html(value)
+                    //colorbox (tm) plugin!
+                    .colorbox({iframe:true, width:"80%", height:"80%"});
         }
     }
+
+    // set value
+    this.set = function(key,value) {
+        this.data[key]=value
+    }
+
     // initialize, calculate additional values
     this.init = function() {
+        //make own copy of data
+        this.data=JSON.parse(JSON.stringify(this.data));
         //set full_name
         var name = [this.data.first_name];
         if (this.data.middle_name) name.push(this.data.middle_name);
@@ -286,13 +380,14 @@ function Politician(data) {
         this.data.full_name = name.join(' '); 
         //set party_votes
         this.data.party_votes=Math.round(this.data.total_votes*this.data.votes_with_party_pct/100);
+
     }
 }
 
 // create an instance of DataHandler
 var d = new DataHandler();
+//wait for DOM
 $(function() {
     // initialize it
     d.init();
-    
 })
