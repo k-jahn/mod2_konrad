@@ -63,7 +63,7 @@ table a, table a:hover, table a:focus {
 	color: inherit;
 }
 /*party labels*/
-.labelDem {
+/*.labelDem {
 	color: blue;
 }
 
@@ -73,7 +73,18 @@ table a, table a:hover, table a:focus {
 .labelInd {
 
 }
+*/
 
+/*party rows*/
+.rowColorR:hover {
+	background-color: #fbb;
+}
+.rowColorD:hover {
+	background-color: #bbf;
+}
+.rowColorI:hover {
+	background-color: #d6d6d6;
+}
 /*- search hits*/
 .searchHit {
 	color: #000;

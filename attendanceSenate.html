@@ -53,17 +53,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr class="rowColorR">
                                 <td>Republican</td>
                                 <td class="statsField" data-party="R">--</td>
                                 <td class="statsField" data-party="R" data-key="missed_votes_pct">--</td>
                             </tr>
-                            <tr>
+                            <tr class="rowColorD">
                                 <td>Democrat</td>
                                 <td class="statsField" data-party="D">--</td>
                                 <td class="statsField" data-party="D" data-key="missed_votes_pct">--</td>
                             </tr>
-                            <tr>
+                            <tr class="rowColorI">
                                 <td>Independent</td>
                                 <td class="statsField" data-party="I">--</td>
                                 <td class="statsField" data-party="I" data-key="missed_votes_pct">--</td>
@@ -76,11 +76,11 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h2>Least Engaged <small>(bottom 10%)</small></h2>
-                    <table class="memberTable table table-hover" data-filter="extremeAttendance" data-sortkey="missed_votes_pct">
+                    <table class="memberTable table partyColor" data-filter="extremeAttendance" data-sortkey="missed_votes_pct">
                         <thead>
                             <tr>
                                 <th class="col-xs-6" data-key="full_name" data-format="linkUrl" >Name</th>
-                                <th class="col-xs-3" data-key="missed_votes" data-format="partyColor"># Missed Votes</th>
+                                <th class="col-xs-3" data-key="missed_votes" data-format="plain"># Missed Votes</th>
                                 <th class="col-xs-3" data-key="missed_votes_pct" data-format="percent">% Missed</th>
                             </tr>
                         </thead>
@@ -90,11 +90,11 @@
                 </div>
                 <div class="col-sm-6">
                     <h2>Most Engaged <small>(top 10%)</small></h2>
-                    <table  class="memberTable table table-hover" data-filter="extremeAttendance" data-sortneg="true" data-sortkey="missed_votes_pct">
+                    <table  class="memberTable table partyColor" data-filter="extremeAttendance" data-sortneg="true" data-sortkey="missed_votes_pct">
                         <thead>
                             <tr>
                                 <th class="col-xs-6" data-key="full_name" data-format="linkUrl" >Name</th>
-                                <th class="col-xs-3" data-key="missed_votes" data-format="partyColor"># Missed Votes</th>
+                                <th class="col-xs-3" data-key="missed_votes" data-format="plain"># Missed Votes</th>
                                 <th class="col-xs-3" data-key="missed_votes_pct" data-format="percent">% Missed</th>
                             </tr>
                         </thead>

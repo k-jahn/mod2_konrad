@@ -9,7 +9,6 @@ $(function(){
 		if (chamber) $('#'+page+' .'+chamber).addClass('active')
 		// set congress
 		var congress = document.cookie.match(/congress=(\d+)/)[1] || 115
-		console.log(congress)
 		$(this).find("#selectCongress")
 			.val(congress)
 			.change()

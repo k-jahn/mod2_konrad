@@ -50,17 +50,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr class="rowColorR">
                                 <td>Republican</td>
                                 <td class="statsField" data-party="R">--</td>
                                 <td class="statsField" data-party="R" data-key="votes_with_party_pct">--</td>
                             </tr>
-                            <tr>
+                            <tr class="rowColorD">
                                 <td>Democrat</td>
                                 <td class="statsField" data-party="D">--</td>
                                 <td class="statsField" data-party="D" data-key="votes_with_party_pct">--</td>
                             </tr>
-                            <tr>
+                            <tr class="rowColorI">
                                 <td>Independent</td>
                                 <td class="statsField" data-party="I">--</td>
                                 <td class="statsField" data-party="I" data-key="votes_with_party_pct">--</td>
@@ -73,11 +73,11 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h2>Least Loyal <small>(bottom 10%)</small></h2>
-                    <table class="memberTable table table-hover" data-filter="extremeLoyalty" data-sortkey="votes_with_party_pct">
+                    <table class="memberTable table partyColor" data-filter="extremeLoyalty" data-sortkey="votes_with_party_pct">
                         <thead>
                             <tr>
                                 <th class="col-xs-6" data-key="full_name" data-format="linkUrl" >Name</th>
-                                <th class="col-xs-3" data-key="party_votes" data-format="partyColor"># Party Votes</th>
+                                <th class="col-xs-3" data-key="party_votes" data-format="plain"># Party Votes</th>
                                 <th class="col-xs-3" data-key="votes_with_party_pct" data-format="percent">% Party Votes</th>
                             </tr>
                         </thead>
@@ -88,11 +88,11 @@
                 <div class="col-sm-6">
                     <h2>Most Loyal <small>(top 10%)</small></h2>
 
-                    <table  class="memberTable table table-hover" data-filter="extremeLoyalty" data-sortneg="true" data-sortkey="votes_with_party_pct">
+                    <table  class="memberTable table partyColor" data-filter="extremeLoyalty" data-sortneg="true" data-sortkey="votes_with_party_pct">
                         <thead>
                             <tr>
                                 <th class="col-xs-6" data-key="full_name" data-format="linkUrl" >Name</th>
-                                <th class="col-xs-3" data-key="party_votes" data-format="partyColor"># Party Votes</th>
+                                <th class="col-xs-3" data-key="party_votes" data-format="plain"># Party Votes</th>
                                 <th class="col-xs-3" data-key="votes_with_party_pct" data-format="percent">% Party Votes</th>
                             </tr>
                         </thead>

@@ -194,6 +194,10 @@ function DataHandler() {
                     $('<td>').append(content)
                 );
             }
+            if (table.hasClass('partyColor')) {
+                row.addClass('rowColor'+member.show('party'))
+            }
+
             //push row to element array
             rowArr.push(row);
         }
@@ -352,20 +356,9 @@ function Politician(data,parent) {
                     default:
                         return 'A miracle!'
                 }
-            case 'partyColor':
-                switch (data.party) {
-                    case 'D':
-                        return $('<span>').text(value).addClass('labelDem')
-                    case 'R':
-                        return $('<span>').text(value).addClass('labelRep')
-                    case 'I':
-                        return $('<span>').text(value).addClass('labelInd')
-                    default:
-                        return 'A miracle!'
-                }
             // percent values with fixed accuracy
             case 'percent':
-                return value.toFixed(1) + '%';
+                return (+value).toFixed(1) + '%';
             // years
             case 'years' :
                 if (value==0) {
