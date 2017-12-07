@@ -5,15 +5,16 @@ function DataHandler() {
     this.congress = ''; //the congress in question, taken from html
     this.members = []; //members list, filled with json data
     this.states = []; //the states list. filled with json data
-    // set intitial user filter values
-    this.filterStatus = {
+    this.filterStatus = { // set intitial user filter values
+
         'D': true,
         'R': true,
         'I': true,
         'state': ""
     }
-    // Politician who owns the lookupTable
-    this.searchHitTable = [];
+    this.searchHitTable = []; // lookuptable for search hits
+    this.localStoreExpires = 60*10*1000
+
     // DataHandler Methods
 
     // init(), sets needed values&calls fetches
@@ -33,7 +34,6 @@ function DataHandler() {
         var jsonURL='data/proPublica/' + this.congress + '/' + this.chamber + '.json'
         // callback for when data has been loaded
         var callback = function(data){
-            console.log('members.json loaded')
             // sets this.members as array of initialized Politicans
             for (var i in data.results[0].members) {
                 that.members.push(new Politician(data.results[0].members[i],that));
@@ -41,18 +41,26 @@ function DataHandler() {
             }
             that.initDisplay();
         }
-
-        var that = this;
-        // if (!localStorage[jsonURL] || ])
-        $.getJSON(jsonURL, function(data) {
-            
-            callback(data)
-            // put in local storage
-            console.log('got JSON from server, saving in localStorage')
-            localStorage.setItem(jsonURL,JSON.stringify(data))
-            // timestamp
-            localStorage.setItem(jsonURL+'.timeStamp',Date.now().toString())
-        });
+        // check local storage for data
+        var storedData=localStorage.getItem(jsonURL) || false;
+        var timeStamp = localStorage.getItem(jsonURL+'.timeStamp') || 0
+        if (+timeStamp<Date.now()-this.localStoreExpires) {
+            if (timeStamp>1) {
+                console.log('found old data in localStorage, fetching from server. ' +(+timeStamp-Date.now()+this.localStoreExpires)/60000 + 'min' )
+            } else console.log('found no data in localStorage, fetching from server.')
+            var that = this;
+            $.getJSON(jsonURL, function(data) {
+                callback(data)
+                // put in local storage
+                console.log('got JSON from server, saving in localStorage for later')
+                localStorage.setItem(jsonURL,JSON.stringify(data))
+                // timestamp
+                localStorage.setItem(jsonURL+'.timeStamp',Date.now().toString())
+            });
+        } else {
+            console.log('found fresh data in localStorage ' +(+timeStamp-Date.now()+this.localStoreExpires)/60000 + 'min' )
+            callback(JSON.parse(storedData))
+        }
     };
     
     // fetch states.json and call displayStates
