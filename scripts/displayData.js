@@ -21,8 +21,8 @@ function DataHandler() {
     this.init = function() {
         //assign values
         this.chamber = $('body').data('chamber');
-        // get congress from sessionStorage!
-        this.congress = sessionStorage.congress || 113;
+        // get congress from cookie!
+        this.congress = document.cookie.match(/congress=(\d+)/)[1] || 115
         //get members JSON
         this.loadMembers();
     }
@@ -285,8 +285,10 @@ function DataHandler() {
         //crawler function to find 10%+
         function crawl(list,key){
             var n=Math.round(list.length*0.1)-1
-            while(list[n+1].show(key)==list[n].show(key))n++
-            return list.slice(0,n)
+            while(list[n+1].show(key)==list[n].show(key)){
+                n++
+            }
+            return list.slice(0,n+1)
         }
         // filters
         if (table.data('filter')=='extremeLoyalty'){
@@ -342,11 +344,22 @@ function Politician(data,parent) {
             case 'party':
                 switch (value) {
                     case 'D':
-                        return $('<span>').text('Dem.').addClass('labelDem')
+                        return $('<span>').text(value).addClass('labelDem')
                     case 'R':
-                        return $('<span>').text('Rep.').addClass('labelRep')
+                        return $('<span>').text(value).addClass('labelRep')
                     case 'I':
-                        return $('<span>').text('Ind.').addClass('labelInd')
+                        return $('<span>').text(value).addClass('labelInd')
+                    default:
+                        return 'A miracle!'
+                }
+            case 'partyColor':
+                switch (data.party) {
+                    case 'D':
+                        return $('<span>').text(value).addClass('labelDem')
+                    case 'R':
+                        return $('<span>').text(value).addClass('labelRep')
+                    case 'I':
+                        return $('<span>').text(value).addClass('labelInd')
                     default:
                         return 'A miracle!'
                 }

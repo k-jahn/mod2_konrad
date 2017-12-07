@@ -38,6 +38,13 @@ img {
 .inverse-dropdown>.active>a{
 	background-color: #000;
 }
+a>select {
+	color:#333;
+}
+a>select:active, a>select:hover{
+	color: #333;
+}
+
 
 /*main*/
 main {
@@ -49,6 +56,11 @@ aside {
 
 hr {
 	border: 1px solid rgba(0,0,0,0.2);
+}
+
+/*tables*/
+table a, table a:hover, table a:focus {
+	color: inherit;
 }
 /*party labels*/
 .labelDem {
@@ -64,7 +76,8 @@ hr {
 
 /*- search hits*/
 .searchHit {
-	font-weight: bold;
+	color: #000;
+	background-color: rgba(0,0,0,0.3);
 }
 
 /*- user inputs*/
@@ -88,12 +101,12 @@ h4 {
  /*- sort icons*/
 .sortIcon {
 	cursor: pointer;
-	color: rgba(0,0,0,0.5);
+	color: rgba(0,0,0,0.3);
 }
 
 .sortIcon.active {
 	cursor: auto;
-	color: rgba(0,0,0,1);
+	color: #333;
 }
 
 /*footer*/
