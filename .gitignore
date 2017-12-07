@@ -1,4 +1,5 @@
 keys/
 node_modules/
 scripts/bootstrap.min.js
+scripts/jquery*
 styles/bootstrap.min.css
