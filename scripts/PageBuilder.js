@@ -1,17 +1,17 @@
-function PageBuilder () {
+// PageBuilder Class, inserts and binds header and footer
+function PageBuilder (congress,chamber,page) {
+	this.congress=congress;
+	this.page=page;
+	this.chamber= chamber || false;
 	this.insertHeader = function() {
+		var that=this;
 		$('header').load('pageModules/header.html',function(){
 			//set active states to show current page
-			var page = $('body').data('page');
-			var chamber= $('body').data('chamber') || false;
 			$('#'+page).addClass('active')
-			if (chamber) $('#'+page+' .'+chamber).addClass('active')
-			// get congress from cookie (if present)
-			var find = /congress=(\d+)/
-			var congress = find.test(document.cookie)?document.cookie.match(find)[1]:115
+			if (that.chamber) $('#'+that.page+' .'+that.chamber).addClass('active')
 			$(this).find("#selectCongress")
 				// display currently active congress
-				.val(congress)
+				.val(that.congress)
 				.change()
 				// on change, set cookie and reload 
 				.on('change',function(){
@@ -24,11 +24,3 @@ function PageBuilder () {
 		$('footer').load('pageModules/footer.html')
 	}
 }
-
-var p = new PageBuilder()
-$(function(){
-	//load header
-	p.insertHeader()
-	// load footer
-	p.insertFooter()
-})
