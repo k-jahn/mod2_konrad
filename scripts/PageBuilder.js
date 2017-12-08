@@ -5,7 +5,7 @@ function PageBuilder (congress,chamber,page) {
 	this.chamber= chamber || false;
 	this.insertHeader = function() {
 		var that=this;
-		$('header').load('pageModules/header.html',function(){
+		var callback = function() {
 			//set active states to show current page
 			$('#'+page).addClass('active')
 			if (that.chamber) $('#'+that.page+' .'+that.chamber).addClass('active')
@@ -18,9 +18,31 @@ function PageBuilder (congress,chamber,page) {
 					document.cookie=('congress='+$(this).val()+';')
 					location.reload(false)
 			})
-		})	
+		}
+		var headerUrl='pageModules/header.html';
+		var headerHtml=localStorage.getItem(headerUrl) || false;
+		if (headerHtml) {
+			console.log('inserting header from localStorage')
+			$('header').html(headerHtml).promise().done(callback)
+		} else {
+			console.log('loading header from server, saving to localStorage')
+			$('header').load(headerUrl,function(data){
+				localStorage.setItem(headerUrl,data)
+				callback()
+			})
+		}	
 	}
 	this.insertFooter=function() {
-		$('footer').load('pageModules/footer.html')
+		var footerUrl='pageModules/footer.html';
+		var footerHtml=localStorage.getItem(footerUrl) || false;
+		if (footerHtml) {
+			console.log('inserting footer from localStorage')
+			$('footer').html(footerHtml)
+		} else {
+			console.log('loading footer from server, saving to localStorage')
+			$('footer').load(footerUrl,function(data){
+				localStorage.setItem(footerUrl,data)
+			})
+		}
 	}
 }

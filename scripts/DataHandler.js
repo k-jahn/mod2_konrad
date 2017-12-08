@@ -210,7 +210,6 @@ function DataHandler(congress,chamber,localStoreExpires) {
                         if (isNaN(x.show($(this).data("key")))) continue
                         sum+= +x.show($(this).data("key"))
                         n++
-                        console.log(n,sum,x.show($(this).data("key")),x.show('full_name'))
                     }
                 }
                 if (n==0) $(this).html('--')
