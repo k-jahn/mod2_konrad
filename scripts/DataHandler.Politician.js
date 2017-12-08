@@ -41,13 +41,34 @@ function Politician(data,parent) {
             // percent values with fixed accuracy
             case 'percent':
                 return (+value).toFixed(1) + '%';
-            // percent with tooltip showing underlying values
+            // percent with tooltip showing total votes and party votes
             case 'percentLoyaltyToolTip':
                 return $('<div>')
                     .text((+value).toFixed(1) + '%')
                     .addClass('toolTip')
                     .append($("<span>")
                         .html(this.data.party_votes+' party votes<br>'+this.data.total_votes+' total votes')
+                        .addClass('toolTipText')
+                        )
+            // value with tooltip showing district
+            case 'districtToolTip':
+                var ending = function(n){
+                    switch (+n) {
+                        case 1:
+                            return "1st"
+                        case 2:
+                            return "2nd"
+                        case 3:
+                            return "3rd"
+                        default:
+                            return n+"th"
+                    }
+                }
+                return $('<div>')
+                    .text(value)
+                    .addClass('toolTip')
+                    .append($("<span>")
+                        .html(ending(this.data.district)+' congressional district')
                         .addClass('toolTipText')
                         )
             // years
@@ -66,6 +87,9 @@ function Politician(data,parent) {
                     .html(value)
                     //colorbox (tm) plugin!
                     .colorbox({iframe:true, width:"80%", height:"80%"});
+            default:
+                console.log('bad format '+format)
+                return value;                
         }
     }
 
@@ -85,6 +109,5 @@ function Politician(data,parent) {
         this.data.full_name = name.join(' '); 
         //set party_votes
         this.data.party_votes=Math.round(this.data.total_votes*this.data.votes_with_party_pct/100);
-
     }
 }
