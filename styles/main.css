@@ -140,11 +140,14 @@ h4 {
     transform: translateX(1em);
     z-index: 1;
     transition: color 0.2s ease-in; 
-    transition: background-color 0.2s ease-in; 
+    transition: background-color 0.2s ease-out; 
     pointer-events: none;
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; 
 }
 .toolTip:hover .toolTipText {
-    /*visibility: visible;*/
     background-color: rgba(0,0,0,0.8);
     color: #fff;
 }

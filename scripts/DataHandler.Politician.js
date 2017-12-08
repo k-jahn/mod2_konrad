@@ -1,4 +1,4 @@
-// define class Politician, stores and returns formated data
+// define class Politician, stores and returns formated data for DataHandler
 function Politician(data,parent) {
     //store json data
     this.data = data;

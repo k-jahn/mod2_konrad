@@ -17,11 +17,8 @@ function DataHandler(congress,chamber,localStoreExpires) {
     this.searchHitTable = []; // lookuptable for search hits
 
     // DataHandler Methods
-    // init
+    // init - redundant - mb remove?
     this.init = function() {
-        //assign values
-        
-        //get members JSON
         this.loadMembers();
     }
     
