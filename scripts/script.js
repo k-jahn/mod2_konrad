@@ -7,7 +7,7 @@ $(function(){
 	let congress = test.test(document.cookie)?document.cookie.match(test)[1]:115
 	// get page and chamber from html
 	let page = $('body').data('page');
-	let chamber = $('body').data('chamber') || false;
+	let chamber = $('body').data('chamber') || "senate";
 	// set localStoreExpiry
 	let localStoreExpires= 60*10*1000;
 	// create global instances of PageBuilder and DataHandler

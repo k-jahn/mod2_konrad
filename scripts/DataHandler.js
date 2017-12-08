@@ -206,8 +206,11 @@ function DataHandler(congress,chamber,localStoreExpires) {
                 var n=0
                 for (x of that.members){
                     if (x.show('party')==$(this).data("party")){
+                        // if no value present, skip
+                        if (isNaN(x.show($(this).data("key")))) continue
                         sum+= +x.show($(this).data("key"))
                         n++
+                        console.log(n,sum,x.show($(this).data("key")),x.show('full_name'))
                     }
                 }
                 if (n==0) $(this).html('--')
