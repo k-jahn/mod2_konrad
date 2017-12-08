@@ -22,7 +22,8 @@ function DataHandler() {
         //assign values
         this.chamber = $('body').data('chamber');
         // get congress from cookie!
-        this.congress = document.cookie.match(/congress=(\d+)/)[1] || 115
+        var find = /congress=(\d+)/
+        this.congress = find.test(document.cookie)?document.cookie.match(find)[1]:115
         //get members JSON
         this.loadMembers();
     }
@@ -344,21 +345,38 @@ function Politician(data,parent) {
             //plain text
             case 'plain':
                 return value;
-            //party abbreviations
+            //party icons
             case 'party':
+                var out=function(text,href){
+                    return $('<span>').addClass('partySpan toolTip')
+                        .append($('<img>').attr('src',href))
+                        .append($('<span>')
+                            .text(text)
+                            .addClass('toolTipText')
+                            )
+                }
                 switch (value) {
-                    case 'D':
-                        return $('<span>').text(value).addClass('labelDem')
+                    case 'D': 
+                        return out('Democrat','images/democrat.png')
                     case 'R':
-                        return $('<span>').text(value).addClass('labelRep')
+                        return out('Republican','images/republican.png')
                     case 'I':
-                        return $('<span>').text(value).addClass('labelInd')
+                        return out('Independent','images/independent.png')
                     default:
                         return 'A miracle!'
                 }
             // percent values with fixed accuracy
             case 'percent':
                 return (+value).toFixed(1) + '%';
+            // percent with tooltip showing underlying values
+            case 'percentLoyaltyToolTip':
+                return $('<div>')
+                    .text((+value).toFixed(1) + '%')
+                    .addClass('toolTip')
+                    .append($("<span>")
+                        .html(this.data.party_votes+' party votes<br>'+this.data.total_votes+' total votes')
+                        .addClass('toolTipText')
+                        )
             // years
             case 'years' :
                 if (value==0) {
