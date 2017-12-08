@@ -45,21 +45,17 @@ function DataHandler() {
         // check local storage for data
         var storedData=localStorage.getItem(jsonURL) || false;
         var timeStamp = localStorage.getItem(jsonURL+'.timeStamp') || 0
+        console.log(!timeStamp?(jsonURL+' not found in localStorag'):(jsonURL +' freshness: ' + ((+timeStamp-Date.now()+this.localStoreExpires)/60000).toFixed(2) + 'min'))
         if (+timeStamp<Date.now()-this.localStoreExpires) {
-            if (timeStamp>1) {
-                console.log('found old data in localStorage, fetching from server. ' +(+timeStamp-Date.now()+this.localStoreExpires)/60000 + 'min' )
-            } else console.log('found no data in localStorage, fetching from server.')
             var that = this;
             $.getJSON(jsonURL, function(data) {
                 callback(data)
                 // put in local storage
-                console.log('got JSON from server, saving in localStorage for later')
                 localStorage.setItem(jsonURL,JSON.stringify(data))
                 // timestamp
                 localStorage.setItem(jsonURL+'.timeStamp',Date.now().toString())
             });
         } else {
-            console.log('found fresh data in localStorage ' +(+timeStamp-Date.now()+this.localStoreExpires)/60000 + 'min' )
             callback(JSON.parse(storedData))
         }
     };
@@ -107,7 +103,7 @@ function DataHandler() {
 
     //creates and binds table sort inputs
     this.initSort = function(table) {
-        console.log('initializing sort & search functionality for'+ this)
+        console.log('initializing sort & search functionality')
         var that=this
         //callback function
         function callback(){
@@ -309,19 +305,20 @@ function DataHandler() {
 
     // sort members array before display in table
     this.sortMembers = function(members,table) {
+        // exclude empty memberlists
         if (members.length==0) return [];
+        // get sort parameters from table
         var sortKey=table.data('sortkey') || false;
         var sortNeg=table.data('sortneg') || false;
-        var sortedMembers=members
-        console.log('sort function on, sorting by: ' +sortKey +' reversed: '+sortNeg)
-        
-        if (!isNaN(members[0].show(sortKey))){
-            sortedMembers.sort((a,b)=>a.show(sortKey)-b.show(sortKey))
+        // check if string or number and sort accordingly
+        if (isNaN(members[0].show(sortKey))){
+            members.sort((a,b)=>a.show(sortKey)<b.show(sortKey)?-1:1)
         } else {
-            sortedMembers.sort((a,b)=>a.show(sortKey)<b.show(sortKey)?-1:1)
+            members.sort((a,b)=>+a.show(sortKey)-b.show(sortKey))
         }
-        if (sortNeg) sortedMembers=sortedMembers.reverse()
-        return sortedMembers
+        // check if sort is reversed
+        if (sortNeg) members.reverse()
+        return members
     }
 }
 
