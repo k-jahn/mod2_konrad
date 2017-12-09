@@ -14,6 +14,29 @@ function Politician(data,parent) {
                 break
             }
         }
+        // english language number formater
+        var nTh = function(n){
+            switch (+n%100) {
+                case 11:
+                    return '11th'
+                case 12:
+                    return '12th'
+                case 13:
+                    return '13th'
+                default:
+                    switch (+n%10) {
+                        case 1:
+                            return n+"st"
+                        case 2:
+                            return n+"nd"
+                        case 3:
+                            return n+"rd"
+                        default:
+                            return n+"th"
+                    }
+            }
+        }
+        // different formatting options
         switch (format || 'plain') {
             //plain text
             case 'plain':
@@ -52,26 +75,24 @@ function Politician(data,parent) {
                         )
             // value with tooltip showing district
             case 'districtToolTip':
-                var ending = function(n){
-                    switch (+n) {
-                        case 1:
-                            return "1st"
-                        case 2:
-                            return "2nd"
-                        case 3:
-                            return "3rd"
-                        default:
-                            return n+"th"
-                    }
-                }
                 return $('<div>')
                     .text(value)
                     .addClass('toolTip')
                     .append($("<span>")
-                        .html(ending(this.data.district)+' congressional district')
+                        .html(nTh(this.data.district)+' congressional district')
+                        .addClass('toolTipText')
+                        )
+            // value with tooltip senator class
+            case 'classToolTip':
+                return $('<div>')
+                    .text(value)
+                    .addClass('toolTip')
+                    .append($("<span>")
+                        .html('Senator '+nTh(+this.data.senate_class)+' class')
                         .addClass('toolTipText')
                         )
             // years
+                
             case 'years' :
                 if (value==0) {
                     return 'none'

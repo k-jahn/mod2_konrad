@@ -1,3 +1,4 @@
+
 // define class for data handling
 function DataHandler(congress,chamber,localStoreExpires) {
     // DataHandler properties
@@ -37,39 +38,17 @@ function DataHandler(congress,chamber,localStoreExpires) {
             that.initDisplay();
         }
         // check local storage for data
-        var storedData=localStorage.getItem(jsonURL) || false;
-        var timeStamp = localStorage.getItem(jsonURL+'.timeStamp') || 0
-        console.log(!timeStamp?(jsonURL+' not found in localStorag'):(jsonURL +' freshness: ' + ((+timeStamp-Date.now()+this.localStoreExpires)/60000).toFixed(2) + 'min'))
-        if (+timeStamp<Date.now()-this.localStoreExpires) {
-            var that = this;
-            $.getJSON(jsonURL, function(data) {
-                callback(data)
-                // put in local storage
-                localStorage.setItem(jsonURL,JSON.stringify(data))
-                // timestamp
-                localStorage.setItem(jsonURL+'.timeStamp',Date.now().toString())
-            });
-        } else {
-            callback(JSON.parse(storedData))
-        }
+        JSON.localStorageManager(jsonURL,callback,this.localStoreExpires)
     };
     
     // fetch states.json and call displayStates
     this.fetchStates = function() {
-        var data = localStorage.getItem('data/states.json') || false
-        if (data) {
-            console.log('found states.json in local storage')
-            this.states=JSON.parse(data);
-            this.displayStates();
-        } else {
-            var that = this;
-            $.getJSON('data/states.json', function(data) {
-                that.states = data;
-                that.displayStates();
-                localStorage.setItem('data/states.json',JSON.stringify(that.states))
-                console.log('states.json loaded from server, cached in localData')
-            });
-        }
+        var that=this;
+        var callback = function(data) {
+            that.states=data;
+            that.displayStates()
+        };
+        JSON.localStorageManager('data/states.json',callback,this.localStoreExpires)
     };
 
     //searches document for tables to display data, calls appropriate methods
@@ -206,8 +185,8 @@ function DataHandler(congress,chamber,localStoreExpires) {
                 var n=0
                 for (x of that.members){
                     if (x.show('party')==$(this).data("party")){
-                        // if no value present, skip
-                        if (isNaN(x.show($(this).data("key")))) continue
+                        // if no value present or member did not vote, skip
+                        if (isNaN(x.show($(this).data("key")))||x.show('total_votes')==0) continue
                         sum+= +x.show($(this).data("key"))
                         n++
                     }
